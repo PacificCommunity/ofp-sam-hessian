@@ -1,6 +1,6 @@
-#' Split Hessian
+#' Hessian Split
 #'
-#' Prepare subdirectories for parallel Hessian computations.
+#' Split upcoming parallel Hessian computations into subdirectories.
 #'
 #' @param original.dir directory containing a converged model run.
 #' @param working.dir directory where subdirectories will be created.
@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' split_hessian("z:/yft/2023/model_runs/diagnostic", "c:/x/yft/hessian", 16)
+#' hessian_split("z:/yft/2023/model_runs/diagnostic", "c:/x/yft/hessian", 16)
 #' }
 #'
 #' @importFrom tools file_path_sans_ext
@@ -19,7 +19,7 @@
 #'
 #' @export
 
-split_hessian <- function(original.dir, working.dir, njobs, force=FALSE)
+hessian_split <- function(original.dir, working.dir, njobs, force=FALSE)
 {
   # 1  Find MFCL input files
   frqfile <- dir(original.dir, pattern="\\.frq$")

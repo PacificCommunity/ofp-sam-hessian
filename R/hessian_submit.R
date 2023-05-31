@@ -1,4 +1,4 @@
-#' Submit Hessian
+#' Hessian Submit
 #'
 #' Submit parallel Hessian computations to Condor.
 #'
@@ -12,14 +12,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' run_hessian("c:/x/yft/hessian")
+#' hessian_submit("c:/x/yft/hessian")
 #' }
 #'
 #' @importFrom condor condor_submit
 #'
 #' @export
 
-run_hessian <- function(working.dir, top.dir="condor_hessian", ...)
+hessian_submit <- function(working.dir, top.dir="condor_hessian", ...)
 {
   for(i in 1)
     condor_submit(local.dir=working.dir, top.dir=top.dir, ...)
