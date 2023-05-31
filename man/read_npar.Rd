@@ -21,3 +21,7 @@ read_npar("10.par")
 }
 
 }
+\seealso{
+\code{\link[FLR4MFCL]{read.MFCLPar}} reads all the information contained in a
+\file{.par} file, which takes substantially longer.
+}
