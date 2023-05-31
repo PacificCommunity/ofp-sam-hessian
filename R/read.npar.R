@@ -6,6 +6,11 @@
 #'
 #' @return Number of parameters as an integer.
 #'
+#' @examples
+#' \dontrun{
+#' read.npar("10.par.par")
+#' }
+#'
 #' @export
 
 read.npar <- function(parfile)

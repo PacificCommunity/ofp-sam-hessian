@@ -15,3 +15,9 @@ Number of parameters as an integer.
 \description{
 Read the number of estimated parameters from a \file{.par} file.
 }
+\examples{
+\dontrun{
+read.npar("10.par.par")
+}
+
+}
