@@ -3,3 +3,4 @@
 export(read_npar)
 export(split_hessian)
 importFrom(FLR4MFCL,finalPar)
+importFrom(tools,file_path_sans_ext)

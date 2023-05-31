@@ -14,6 +14,7 @@
 #' split_hessian("z:/yft/2023/model_runs/diagnostic", "c:/hessian", njobs=16)
 #' }
 #'
+#' @importFrom tools file_path_sans_ext
 #' @importFrom FLR4MFCL finalPar
 #'
 #' @export
