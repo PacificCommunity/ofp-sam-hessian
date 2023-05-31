@@ -28,21 +28,18 @@ hessian_split <- function(original.dir, working.dir, njobs, force=FALSE)
   parfile.full <- finalPar(original.dir, quiet=TRUE)
   parfile <- basename(parfile.full)
   species <- file_path_sans_ext(frqfile)
+  files <- c(parfile, "condor.sub", "mfcl.cfg", "mfclo64",
+             paste0(species, ".", c("age_length", "frq", "tag")))
 
   # 2  Create empty directories
   dirs <- paste0("hess_", seq_len(njobs))
   dirs <- file.path(working.dir, dirs)
-  if(any(dir.exists(dirs)))
+  if(any(dir.exists(dirs)) && force)
+    unlink(dirs, recursive=TRUE)
+  if(any(dir.exists(dirs)) && !force)
   {
-    if(force)
-    {
-      unlink(dirs, recursive=TRUE)
-    }
-    else
-    {
-      stop("'", dirs[dir.exists(dirs)][1],
-           "' already exists, consider force=TRUE")
-    }
+    stop("'", dirs[dir.exists(dirs)][1],
+         "' already exists, consider force=TRUE")
   }
   sapply(dirs, dir.create)
 
@@ -59,16 +56,22 @@ hessian_split <- function(original.dir, working.dir, njobs, force=FALSE)
                           "hessian -switch 3 1 145 1",
                           "1 223", beg, "1 224", end, "&")
 
-  # 5  Populate directories
-  files <- c(parfile, "condor.sub", "mfcl.cfg", "mfclo64",
-             paste0(species, ".", c("age_length", "frq", "tag")))
+  # 5  Prepare tempdir
+  # Many times faster to copy once from Penguin instead of njobs times
+  hessian.tempdir <- file.path(tempdir(), "hessian")
+  unlink(hessian.tempdir, recursive=TRUE)
+  dir.create(hessian.tempdir)
+  suppressWarnings(file.copy(file.path(original.dir, files), hessian.tempdir,
+                             copy.date=TRUE))  # some files could be missing
+
+  # 6  Populate directories
   for(i in seq_along(dirs))
   {
-    suppressWarnings(file.copy(file.path(original.dir, files), dirs[i],
-                               copy.date=TRUE))
+    file.copy(dir(hessian.tempdir, full.names=TRUE), dirs[i], copy.date=TRUE)
     writeLines(condor.run, file.path(dirs[i], "condor_run.sh"))
     writeLines(dohessian.calc[i], file.path(dirs[i], "dohessian_calc.sh"))
   }
+  unlink(hessian.tempdir, recursive=TRUE)
 
   invisible(dirs)
 }
