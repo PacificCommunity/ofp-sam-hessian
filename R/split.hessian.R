@@ -1,23 +1,22 @@
-original.dir <- file.path("z:/yft/2023/model_runs/stepwise",
-                          "04_CatchCond/04b_Catch_Cond_New_CPUE")
-working.dir <- "c:/x/yft/hessian"
-njobs <- 4
-force <- FALSE
-
-library(FLR4MFCL)  # finalPar
-
-read.npar <- function(parfile)
-{
-  txt <- readLines(parfile)
-  line <- which(txt == "# The number of parameters") + 1
-  npar <- as.integer(txt[line])
-  npar
-}
-
-# split.hessian
-# run.hessian
-# check.hessian
-# merge.hessian
+#' Split Hessian
+#'
+#' Prepare subdirectories for parallel Hessian computations.
+#'
+#' @param original.dir directory containing a converged model run.
+#' @param working.dir directory where subdirectories will be created.
+#' @param njobs number of parallel jobs to create.
+#' @param force whether to remove existing subdirectories.
+#'
+#' @return Names of subdirectories created.
+#'
+#' @examples
+#' \dontrun{
+#' split.hessian("z:/yft/2023/model_runs/diagnostic", "c:/hessian", njobs=16)
+#' }
+#'
+#' @importFrom FLR4MFCL finalPar
+#'
+#' @export
 
 split.hessian <- function(original.dir, working.dir, njobs, force=FALSE)
 {
@@ -33,7 +32,12 @@ split.hessian <- function(original.dir, working.dir, njobs, force=FALSE)
   dirs <- paste0("hess_", seq_len(njobs))
   dirs <- file.path(working.dir, dirs)
   if(any(dir.exists(dirs)))
-    stop("'", dirs[dir.exists(dirs)][1], "' already exists")
+  {
+    if(force)
+      unlink(dirs, recursive=TRUE)
+    else
+      stop("'", dirs[dir.exists(dirs)][1], "' already exists")
+  }
   sapply(dirs, dir.create)
 
   # 3  Calculate cutting points
@@ -59,5 +63,6 @@ split.hessian <- function(original.dir, working.dir, njobs, force=FALSE)
     writeLines(condor.run, file.path(dirs[i], "condor_run.sh"))
     writeLines(dohessian.calc[i], file.path(dirs[i], "dohessian_calc.sh"))
   }
+
   invisible(dirs)
 }
