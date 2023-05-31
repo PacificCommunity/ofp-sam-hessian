@@ -11,14 +11,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' split.hessian("z:/yft/2023/model_runs/diagnostic", "c:/hessian", njobs=16)
+#' split_hessian("z:/yft/2023/model_runs/diagnostic", "c:/hessian", njobs=16)
 #' }
 #'
 #' @importFrom FLR4MFCL finalPar
 #'
 #' @export
 
-split.hessian <- function(original.dir, working.dir, njobs, force=FALSE)
+split_hessian <- function(original.dir, working.dir, njobs, force=FALSE)
 {
   # 1  Find MFCL input files
   frqfile <- dir(original.dir, pattern="\\.frq$")
@@ -41,7 +41,7 @@ split.hessian <- function(original.dir, working.dir, njobs, force=FALSE)
   sapply(dirs, dir.create)
 
   # 3  Calculate cutting points
-  npar <- read.npar(parfile.full)
+  npar <- read_npar(parfile.full)
   ind <- ceiling(seq(0, npar, length.out=njobs+1))  # 0 1000 2000 3000 4000
   beg <- ind[-length(ind)] + 1                      # 1 1001 2001 3001
   end <- ind[-1]                                    # 1000 2000 3000 4000

@@ -8,12 +8,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' read.npar("10.par.par")
+#' read_npar("10.par")
 #' }
 #'
 #' @export
 
-read.npar <- function(parfile)
+read_npar <- function(parfile)
 {
   txt <- readLines(parfile)
   line <- which(txt == "# The number of parameters") + 1

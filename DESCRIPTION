@@ -3,6 +3,7 @@ Version: 1.0.0
 Date: 2023-05-30
 Title: MFCL Hessian Calculations and Diagnostics
 Authors@R: c(person("Arni", "Magnusson", role=c("aut","cre"), email="thisisarni@gmail.com"))
+Imports: FLR4MFCL
 Description: Calculate Hessian matrix in MULTIFAN-CL and run diagnostics.
 License: GPL-3
 URL: https://github.com/PacificCommunity/ofp-sam-hessian
