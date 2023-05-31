@@ -35,9 +35,14 @@ hessian_split <- function(original.dir, working.dir, njobs, force=FALSE)
   if(any(dir.exists(dirs)))
   {
     if(force)
+    {
       unlink(dirs, recursive=TRUE)
+    }
     else
-      stop("'", dirs[dir.exists(dirs)][1], "' already exists")
+    {
+      stop("'", dirs[dir.exists(dirs)][1],
+           "' already exists, consider force=TRUE")
+    }
   }
   sapply(dirs, dir.create)
 
