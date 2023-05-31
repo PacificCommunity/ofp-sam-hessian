@@ -58,20 +58,20 @@ hessian_split <- function(original.dir, working.dir, njobs, force=FALSE)
 
   # 5  Prepare tempdir
   # Many times faster to copy once from Penguin instead of njobs times
-  hessian.tempdir <- file.path(tempdir(), "hessian")
-  unlink(hessian.tempdir, recursive=TRUE)
-  dir.create(hessian.tempdir)
-  suppressWarnings(file.copy(file.path(original.dir, files), hessian.tempdir,
+  tempdir.hessian <- file.path(tempdir(), "hessian")
+  unlink(tempdir.hessian, recursive=TRUE)
+  dir.create(tempdir.hessian)
+  suppressWarnings(file.copy(file.path(original.dir, files), tempdir.hessian,
                              copy.date=TRUE))  # some files could be missing
 
   # 6  Populate directories
   for(i in seq_along(dirs))
   {
-    file.copy(dir(hessian.tempdir, full.names=TRUE), dirs[i], copy.date=TRUE)
+    file.copy(dir(tempdir.hessian, full.names=TRUE), dirs[i], copy.date=TRUE)
     writeLines(condor.run, file.path(dirs[i], "condor_run.sh"))
     writeLines(dohessian.calc[i], file.path(dirs[i], "dohessian_calc.sh"))
   }
-  unlink(hessian.tempdir, recursive=TRUE)
+  unlink(tempdir.hessian, recursive=TRUE)
 
   invisible(dirs)
 }
