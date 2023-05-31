@@ -22,6 +22,7 @@
 #' \url{https://github.com/PacificCommunity/ofp-sam-hessian}
 #'
 #' @seealso
-#' \pkg{hessian} is used in combination with the \pkg{FLR4MFCL} package.
+#' \pkg{hessian} is used in combination with the \pkg{condor} and \pkg{FLR4MFCL}
+#' packages.
 
 NA
