@@ -1,7 +1,8 @@
-condor
-======
+hessian
+=======
 
-Calculate Hessian matrix in MULTIFAN-CL and run diagnostics.
+Organize parallel computations of the Hessian matrix in MULTIFAN-CL and run
+diagnostics.
 
 Installation
 ------------
@@ -20,7 +21,7 @@ For a summary of the package:
 
 ```R
 library(hessian)
-?hessian
+?"hessian-package"
 ```
 
 Development
