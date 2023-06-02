@@ -52,7 +52,7 @@ hessian_split <- function(original.dir, working.dir, njobs, force=FALSE)
   # 4  Prepare scripts
   condor.run <- readLines(file.path(original.dir, "condor_run.sh"))
   condor.run <- gsub("doitall", "dohessian_calc", condor.run)
-  dohessian.calc <- paste("mfclo64", frqfile, parfile,
+  dohessian.calc <- paste("#!/bin/bash\n\nmfclo64", frqfile, parfile,
                           "hessian -switch 3 1 145 1",
                           "1 223", beg, "1 224", end, "&")
 
@@ -68,8 +68,13 @@ hessian_split <- function(original.dir, working.dir, njobs, force=FALSE)
   for(i in seq_along(dirs))
   {
     file.copy(dir(tempdir.hessian, full.names=TRUE), dirs[i], copy.date=TRUE)
-    writeLines(condor.run, file.path(dirs[i], "condor_run.sh"))
-    writeLines(dohessian.calc[i], file.path(dirs[i], "dohessian_calc.sh"))
+    # Bash scripts must have Unix line endings
+    con <- file(file.path(dirs[i], "condor_run.sh"), "wb")
+    writeLines(condor.run, con)
+    close(con)
+    con <- file(file.path(dirs[i], "dohessian_calc.sh"), "wb")
+    writeLines(dohessian.calc[i], con)
+    close(con)
   }
   unlink(tempdir.hessian, recursive=TRUE)
 
