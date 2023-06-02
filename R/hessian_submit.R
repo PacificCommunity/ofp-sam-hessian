@@ -12,6 +12,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' session <- ssh_connect("servername")
 #' hessian_submit("c:/x/yft/hessian")
 #' }
 #'
@@ -21,6 +22,11 @@
 
 hessian_submit <- function(working.dir, top.dir="condor_hessian", ...)
 {
-  for(i in 1)
-    condor_submit(local.dir=working.dir, top.dir=top.dir, ...)
+  dirs <- dir(working.dir, full.names=TRUE)
+  dirs <- dirs[order(as.integer(gsub(".*_([0-9]+)", "\\1", dirs)))]  # sort
+  for(i in seq_along(dirs))
+  {
+    cat("Submitting ", basename(dirs[i]), "\n", sep="")
+    condor_submit(local.dir=dirs[i], top.dir=top.dir, ...)
+  }
 }

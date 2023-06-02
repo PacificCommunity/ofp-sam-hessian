@@ -22,6 +22,7 @@ Submit parallel Hessian computations to Condor.
 }
 \examples{
 \dontrun{
+session <- ssh_connect("servername")
 hessian_submit("c:/x/yft/hessian")
 }
 
