@@ -1,6 +1,7 @@
 #' Hessian Split
 #'
-#' Split upcoming parallel Hessian computations into subdirectories.
+#' Split parallel Hessian computations into subdirectories so they are ready to
+#' submit.
 #'
 #' @param original.dir directory containing a converged model run.
 #' @param working.dir directory where subdirectories will be created.
@@ -54,7 +55,7 @@ hessian_split <- function(original.dir, working.dir, njobs, force=FALSE)
   condor.run <- gsub("doitall", "dohessian_calc", condor.run)
   dohessian.calc <- paste("#!/bin/bash\n\nmfclo64", frqfile, parfile,
                           "hessian -switch 3 1 145 1",
-                          "1 223", beg, "1 224", end, "&")
+                          "1 223", beg, "1 224", end)
 
   # 5  Prepare tempdir
   # Many times faster to copy once from Penguin instead of njobs times

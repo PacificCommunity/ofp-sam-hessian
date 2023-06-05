@@ -19,7 +19,8 @@ hessian_split(original.dir, working.dir, njobs, force = FALSE)
 Names of subdirectories created.
 }
 \description{
-Split upcoming parallel Hessian computations into subdirectories.
+Split parallel Hessian computations into subdirectories so they are ready to
+submit.
 }
 \examples{
 \dontrun{
