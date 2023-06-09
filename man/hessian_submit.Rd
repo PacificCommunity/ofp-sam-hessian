@@ -15,7 +15,7 @@ Hessian computations.}
 \item{\dots}{passed to \code{\link{condor_submit}}.}
 }
 \value{
-Type of output.
+Remote directory names with the job id as a name attribute.
 }
 \description{
 Submit parallel Hessian computations to Condor.
