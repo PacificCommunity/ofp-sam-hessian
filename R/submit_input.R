@@ -7,7 +7,7 @@
 #'        Hessian computations.
 #' @param \dots passed to \code{\link{condor_submit}}.
 #'
-#' @return Remote directory names with the job id as a name attribute.
+#' @return Data frame showing submitted jobs.
 #'
 #' @examples
 #' \dontrun{
@@ -24,19 +24,16 @@ submit_input <- function(working.dir, top.dir="condor_hessian", ...)
   # Examine directories
   dirs <- dir(working.dir, full.names=TRUE)
   dirs <- dirs[order(as.integer(gsub(".*_([0-9]+)", "\\1", dirs)))]  # sort
-  n <- length(dirs)
 
   # Submit each model run directory to Condor, remembering job ids
-  jobs <- character(n)
-  ids <- integer(n)
-  for(i in seq_len(n))
+  jobs <- data.frame(dir=character(), job.id=integer())
+  for(i in seq_along(dirs))
   {
     cat("Submitting ", basename(dirs[i]), "\n", sep="")
     job <- condor_submit(local.dir=dirs[i], top.dir=top.dir, ...)
-    jobs[i] <- job
-    ids[i] <- as.integer(names(job))
+    jobs[i,"dir"] <- as.character(job)
+    jobs[i,"job.id"] <- as.integer(names(job))
   }
-  names(jobs) <- ids
 
   jobs
 }
