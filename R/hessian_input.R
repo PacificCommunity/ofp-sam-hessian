@@ -78,5 +78,5 @@ hessian_input <- function(original.dir, working.dir, njobs, force=FALSE)
   }
   unlink(tempdir.hessian, recursive=TRUE)
 
-  invisible(dirs)
+  dirs
 }
