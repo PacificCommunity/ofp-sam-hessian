@@ -6,8 +6,8 @@
 \alias{hessian}
 \title{Parallel Hessian Computations and Diagnostics}
 \description{
-Organize parallel computations of the Hessian matrix in MULTIFAN-CL
-and run diagnostics.
+Organize parallel computations of the Hessian matrix in MULTIFAN-CL and run
+diagnostics.
 }
 \details{
 \emph{Main interface:}
