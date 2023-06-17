@@ -1,6 +1,6 @@
-#' Submit Input
+#' Submit Split
 #'
-#' Submit Hessian input subdirectories to Condor for parallel computations.
+#' Submit Hessian split subdirectories to Condor for parallel computations.
 #'
 #' @param working.dir local directory containing Hessian subdirectories.
 #' @param top.dir top directory on Condor submitter machine for running parallel
@@ -12,14 +12,14 @@
 #' @examples
 #' \dontrun{
 #' session <- ssh_connect("servername")
-#' submit_input("c:/x/yft/hessian")
+#' submit_split("c:/x/yft/hessian")
 #' }
 #'
 #' @importFrom condor condor_submit
 #'
 #' @export
 
-submit_input <- function(working.dir, top.dir="condor_hessian", ...)
+submit_split <- function(working.dir, top.dir="condor_hessian", ...)
 {
   # Examine directories
   dirs <- dir(working.dir, full.names=TRUE)
