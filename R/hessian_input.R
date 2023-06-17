@@ -3,7 +3,7 @@
 #' Prepare Hessian input subdirectories for parallel computations.
 #'
 #' @param original.dir directory containing a converged model run.
-#' @param working.dir directory where subdirectories will be created.
+#' @param working.dir directory where Hessian subdirectories will be created.
 #' @param njobs number of parallel jobs to create.
 #' @param force whether to remove existing subdirectories.
 #'

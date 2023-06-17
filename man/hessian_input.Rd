@@ -9,7 +9,7 @@ hessian_input(original.dir, working.dir, njobs, force = FALSE)
 \arguments{
 \item{original.dir}{directory containing a converged model run.}
 
-\item{working.dir}{directory where subdirectories will be created.}
+\item{working.dir}{directory where Hessian subdirectories will be created.}
 
 \item{njobs}{number of parallel jobs to create.}
 
