@@ -4,7 +4,7 @@
 \alias{hessian_merge}
 \title{Hessian Merge}
 \usage{
-hessian_merge(working.dir, top.dir = "condor_hessian", ...)
+hessian_merge(working.dir = ".", top.dir = "condor_hessian", ...)
 }
 \arguments{
 \item{working.dir}{local directory containing Hessian subdirectories.}
@@ -23,7 +23,7 @@ Gather \verb{.hes} files from parallel computations into one directory.
 \examples{
 \dontrun{
 session <- ssh_connect("servername")
-hessian_merge("c:/x/yft/hessian")
+hessian_merge("c:/yft/hessian")
 }
 
 }

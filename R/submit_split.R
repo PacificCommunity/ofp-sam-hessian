@@ -12,14 +12,14 @@
 #' @examples
 #' \dontrun{
 #' session <- ssh_connect("servername")
-#' submit_split("c:/x/yft/hessian")
+#' submit_split("c:/yft/hessian")
 #' }
 #'
 #' @importFrom condor condor_submit
 #'
 #' @export
 
-submit_split <- function(working.dir, top.dir="condor_hessian", ...)
+submit_split <- function(working.dir=".", top.dir="condor_hessian", ...)
 {
   # Examine directories
   dirs <- dir(working.dir, full.names=TRUE)

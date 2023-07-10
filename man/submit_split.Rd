@@ -4,7 +4,7 @@
 \alias{submit_split}
 \title{Submit Split}
 \usage{
-submit_split(working.dir, top.dir = "condor_hessian", ...)
+submit_split(working.dir = ".", top.dir = "condor_hessian", ...)
 }
 \arguments{
 \item{working.dir}{local directory containing Hessian subdirectories.}
@@ -23,7 +23,7 @@ Submit Hessian split subdirectories to Condor for parallel computations.
 \examples{
 \dontrun{
 session <- ssh_connect("servername")
-submit_split("c:/x/yft/hessian")
+submit_split("c:/yft/hessian")
 }
 
 }

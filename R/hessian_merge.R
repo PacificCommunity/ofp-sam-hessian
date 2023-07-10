@@ -12,14 +12,14 @@
 #' @examples
 #' \dontrun{
 #' session <- ssh_connect("servername")
-#' hessian_merge("c:/x/yft/hessian")
+#' hessian_merge("c:/yft/hessian")
 #' }
 #'
 #' @importFrom condor condor_dir condor_download
 #'
 #' @export
 
-hessian_merge <- function(working.dir, top.dir="condor_hessian", ...)
+hessian_merge <- function(working.dir=".", top.dir="condor_hessian", ...)
 {
   jobs <- condor_dir(top.dir=top.dir)
 

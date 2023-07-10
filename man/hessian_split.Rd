@@ -4,7 +4,7 @@
 \alias{hessian_split}
 \title{Hessian Split}
 \usage{
-hessian_split(original.dir, working.dir, njobs, force = FALSE)
+hessian_split(original.dir, working.dir = ".", njobs, force = FALSE)
 }
 \arguments{
 \item{original.dir}{directory containing a converged model run.}
@@ -23,7 +23,7 @@ Prepare Hessian split subdirectories for parallel computations.
 }
 \examples{
 \dontrun{
-hessian_split("z:/yft/2023/model_runs/diagnostic", "c:/x/yft/hessian", 16)
+hessian_split("z:/yft/2023/model_runs/diagnostic", "c:/yft/hessian", 16)
 }
 
 }

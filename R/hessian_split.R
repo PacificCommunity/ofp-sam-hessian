@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' hessian_split("z:/yft/2023/model_runs/diagnostic", "c:/x/yft/hessian", 16)
+#' hessian_split("z:/yft/2023/model_runs/diagnostic", "c:/yft/hessian", 16)
 #' }
 #'
 #' @importFrom tools file_path_sans_ext
@@ -19,7 +19,7 @@
 #'
 #' @export
 
-hessian_split <- function(original.dir, working.dir, njobs, force=FALSE)
+hessian_split <- function(original.dir, working.dir=".", njobs, force=FALSE)
 {
   # 1  Find MFCL input files
   frqfile <- dir(original.dir, pattern="\\.frq$")
