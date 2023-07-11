@@ -23,7 +23,7 @@ Submit Hessian split subdirectories to Condor for parallel computations.
 \examples{
 \dontrun{
 session <- ssh_connect("servername")
-submit_splits("c:/yft/hessian")
+submit_splits()
 }
 
 }

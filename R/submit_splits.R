@@ -12,7 +12,7 @@
 #' @examples
 #' \dontrun{
 #' session <- ssh_connect("servername")
-#' submit_splits("c:/yft/hessian")
+#' submit_splits()
 #' }
 #'
 #' @importFrom condor condor_submit
