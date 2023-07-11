@@ -32,7 +32,9 @@ hessian_split <- function(original.dir, working.dir=".", njobs, force=FALSE)
              paste0(species, ".", c("age_length", "frq", "tag")))
 
   # 2  Create empty directories
-  dirs <- paste0("hess_", seq_len(njobs))
+  model <- basename(original.dir)
+  job <- formatC(seq_len(njobs), width=nchar(njobs), flag="0")  # leading zeros
+  dirs <- paste0("hessian_", model, "_", job)
   dirs <- file.path(working.dir, dirs)
   if(any(dir.exists(dirs)) && force)
     unlink(dirs, recursive=TRUE)
