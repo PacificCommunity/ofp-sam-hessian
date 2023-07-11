@@ -3,7 +3,7 @@
 export(hessian_merge)
 export(hessian_split)
 export(read_npar)
-export(submit_split)
+export(submit_splits)
 importFrom(FLR4MFCL,finalPar)
 importFrom(condor,condor_dir)
 importFrom(condor,condor_download)
