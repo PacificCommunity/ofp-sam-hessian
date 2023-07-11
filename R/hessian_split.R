@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' hessian_split("z:/yft/2023/model_runs/diagnostic", "c:/yft/hessian", 16)
+#' hessian_split("z:/yft/2023/model_runs/diagnostic", njobs=16)
 #' }
 #'
 #' @importFrom tools file_path_sans_ext
