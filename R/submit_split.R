@@ -23,6 +23,8 @@ submit_split <- function(working.dir=".", top.dir="condor_hessian", ...)
 {
   # Examine directories
   dirs <- dir(working.dir, full.names=TRUE)
+  dirs <- dirs[dir.exists(dirs)]          # only dirs, not files
+  dirs <- dirs[grep(".*_[0-9]+$", dirs)]  # dir names that end with _number
   dirs <- dirs[order(as.integer(gsub(".*_([0-9]+)", "\\1", dirs)))]  # sort
 
   # Submit each model run directory to Condor, remembering job ids
