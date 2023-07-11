@@ -1,4 +1,4 @@
-#' Submit Split
+#' Submit Splits
 #'
 #' Submit Hessian split subdirectories to Condor for parallel computations.
 #'
@@ -12,14 +12,14 @@
 #' @examples
 #' \dontrun{
 #' session <- ssh_connect("servername")
-#' submit_split("c:/yft/hessian")
+#' submit_splits("c:/yft/hessian")
 #' }
 #'
 #' @importFrom condor condor_submit
 #'
 #' @export
 
-submit_split <- function(working.dir=".", top.dir="condor_hessian", ...)
+submit_splits <- function(working.dir=".", top.dir="condor_hessian", ...)
 {
   # Examine directories
   dirs <- dir(working.dir, full.names=TRUE)
