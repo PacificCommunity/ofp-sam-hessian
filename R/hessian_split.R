@@ -43,7 +43,7 @@ hessian_split <- function(original.dir, working.dir=".", njobs, force=FALSE)
     stop("'", dirs[dir.exists(dirs)][1],
          "' already exists, consider force=TRUE")
   }
-  sapply(dirs, dir.create)
+  sapply(dirs, dir.create, recursive=TRUE, showWarnings=FALSE)
 
   # 3  Calculate cutting points
   npar <- read_npar(parfile.full)
