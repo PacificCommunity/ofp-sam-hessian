@@ -4,7 +4,8 @@
 \alias{hessian_split}
 \title{Hessian Split}
 \usage{
-hessian_split(original.dir, working.dir = ".", njobs, force = FALSE)
+hessian_split(original.dir, working.dir = basename(original.dir), njobs,
+  force = FALSE)
 }
 \arguments{
 \item{original.dir}{directory containing a converged model run.}

@@ -19,7 +19,8 @@
 #'
 #' @export
 
-hessian_split <- function(original.dir, working.dir=".", njobs, force=FALSE)
+hessian_split <- function(original.dir, working.dir=basename(original.dir),
+                          njobs, force=FALSE)
 {
   # 1  Find MFCL input files
   frqfile <- dir(original.dir, pattern="\\.frq$")
