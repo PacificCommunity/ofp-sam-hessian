@@ -52,14 +52,17 @@ hessian_split <- function(original.dir, working.dir=basename(original.dir),
   beg <- ind[-length(ind)] + 1                      # 1 1001 2001 3001
   end <- ind[-1]                                    # 1000 2000 3000 4000
 
-  # 4  Prepare scripts
+  # 4  Prepare parall_hess
+  parall.hess <- c(njobs, npar, paste(beg, collapse=" "))
+
+  # 5  Prepare scripts
   condor.run <- readLines(file.path(original.dir, "condor_run.sh"))
   condor.run <- gsub("doitall", "dohessian_calc", condor.run)
   dohessian.calc <- paste("#!/bin/bash\n\nmfclo64", frqfile, parfile,
                           "hessian -switch 3 1 145 1",
                           "1 223", beg, "1 224", end)
 
-  # 5  Prepare tempdir
+  # 6  Prepare tempdir
   # Many times faster to copy once from Penguin instead of njobs times
   tempdir.hessian <- file.path(tempdir(), "hessian")
   unlink(tempdir.hessian, recursive=TRUE)
@@ -67,7 +70,7 @@ hessian_split <- function(original.dir, working.dir=basename(original.dir),
   suppressWarnings(file.copy(file.path(original.dir, files), tempdir.hessian,
                              copy.date=TRUE))  # some files could be missing
 
-  # 6  Populate directories
+  # 7  Populate directories
   for(i in seq_along(dirs))
   {
     file.copy(dir(tempdir.hessian, full.names=TRUE), dirs[i], copy.date=TRUE)
@@ -77,6 +80,9 @@ hessian_split <- function(original.dir, working.dir=basename(original.dir),
     close(con)
     con <- file(file.path(dirs[i], "dohessian_calc.sh"), "wb")
     writeLines(dohessian.calc[i], con)
+    close(con)
+    con <- file(file.path(dirs[i], "parall_hess"), "wb")
+    writeLines(parall.hess, con)
     close(con)
   }
   unlink(tempdir.hessian, recursive=TRUE)
