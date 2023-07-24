@@ -48,11 +48,11 @@ hessian_serial <- function(original.dir, working.dir=basename(original.dir),
                               "hessian -switch 2", "1 1 1", "1 145 5"))
 
   # 4  Write scripts to files
-  con <- file(file.path(merge.dir, "condor_run.sh"), "wb")
-  writeLines(condor.run, con)  # must have Unix line endings
+  con <- file(file.path(working.dir, "condor_run.sh"), "wb")
+  writeLines(condor.run, con)        # must have Unix line endings
   close(con)
   con <- file(file.path(working.dir, "dohessian_serial.sh"), "wb")
-  writeLines(doitall, con)     # must have Unix line endings
+  writeLines(dohessian.serial, con)  # must have Unix line endings
   close(con)
 
   invisible(dir(working.dir))
