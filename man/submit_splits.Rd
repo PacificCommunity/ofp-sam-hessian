@@ -4,7 +4,7 @@
 \alias{submit_splits}
 \title{Submit Splits}
 \usage{
-submit_splits(working.dir = ".", top.dir = "condor_hessian", ...)
+submit_splits(working.dir = ".", top.dir = "condor", ...)
 }
 \arguments{
 \item{working.dir}{local directory containing Hessian subdirectories.}

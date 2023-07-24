@@ -19,7 +19,7 @@
 #'
 #' @export
 
-submit_splits <- function(working.dir=".", top.dir="condor_hessian", ...)
+submit_splits <- function(working.dir=".", top.dir="condor", ...)
 {
   # Examine directories
   dirs <- dir(working.dir, full.names=TRUE)
