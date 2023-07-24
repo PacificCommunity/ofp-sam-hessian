@@ -38,18 +38,21 @@ hessian_serial <- function(original.dir, working.dir=basename(original.dir),
   suppressWarnings(file.copy(file.path(original.dir, files), working.dir,
                              copy.date=TRUE))  # some files could be missing
 
-  # 3  Prepare doitall
-  doitall <-
-    c("#!/bin/sh", "",
-      paste("mfclo64", frqfile, parfile, "junk1 -file - <<HESS", collapse=" "),
-      "  1 1 1",
-      "  1 145 1    # compute Hessian",
-      "  1 145 5    # produce correlation report",
-      "HESS")
+  # 3  Prepare scripts
+  condor.run <- readLines(file.path(working.dir, "condor_run.sh"))
+  condor.run <- gsub("doitall", "dohessian_serial", condor.run)
+  dohessian.serial <- c("#!/bin/bash", "",
+                        paste("mfclo64", frqfile, parfile,
+                              "hessian -switch 2", "1 1 1", "1 145 1"),
+                        paste("mfclo64", frqfile, parfile,
+                              "hessian -switch 2", "1 1 1", "1 145 5"))
 
-  # 4  Write doitall to file
-  con <- file(file.path(working.dir, "doitall.sh"), "wb")
-  writeLines(doitall, con)
+  # 4  Write scripts to files
+  con <- file(file.path(merge.dir, "condor_run.sh"), "wb")
+  writeLines(condor.run, con)  # must have Unix line endings
+  close(con)
+  con <- file(file.path(working.dir, "dohessian_serial.sh"), "wb")
+  writeLines(doitall, con)     # must have Unix line endings
   close(con)
 
   invisible(dir(working.dir))
