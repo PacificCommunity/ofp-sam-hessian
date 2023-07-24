@@ -13,6 +13,8 @@ hessian_standalone(original.dir, working.dir = NULL, overwrite = FALSE,
 \item{working.dir}{directory where Hessian run will be prepared.}
 
 \item{overwrite}{whether to remove existing working directory.}
+
+\item{quiet}{whether to suppress messages.}
 }
 \value{
 Working directory name where files have been prepared.

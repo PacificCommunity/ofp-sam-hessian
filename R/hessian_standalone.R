@@ -6,6 +6,7 @@
 #' @param original.dir directory containing a converged model run.
 #' @param working.dir directory where Hessian run will be prepared.
 #' @param overwrite whether to remove existing working directory.
+#' @param quiet whether to suppress messages.
 #'
 #' @details
 #' The default value of \code{working.dir = NULL} creates a local working
