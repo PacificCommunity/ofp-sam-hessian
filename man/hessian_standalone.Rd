@@ -4,8 +4,8 @@
 \alias{hessian_standalone}
 \title{Hessian Stand-Alone}
 \usage{
-hessian_standalone(original.dir, working.dir = basename(original.dir),
-  overwrite = FALSE)
+hessian_standalone(original.dir, working.dir = NULL, overwrite = FALSE,
+  quiet = FALSE)
 }
 \arguments{
 \item{original.dir}{directory containing a converged model run.}
@@ -15,11 +15,16 @@ hessian_standalone(original.dir, working.dir = basename(original.dir),
 \item{overwrite}{whether to remove existing working directory.}
 }
 \value{
-Filenames in working directory after preparation.
+Working directory name where files have been prepared.
 }
 \description{
 Prepare working directory for Hessian stand-alone calculation, starting from
 a converged model run.
+}
+\details{
+The default value of \code{working.dir = NULL} creates a local working
+directory with the same name as \code{original.dir} but with a prefix
+\verb{Hess_}.
 }
 \note{
 The term \emph{stand-alone} refers to a calculation of the Hessian that
