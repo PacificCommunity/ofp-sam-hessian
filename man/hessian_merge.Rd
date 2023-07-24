@@ -4,12 +4,12 @@
 \alias{hessian_merge}
 \title{Hessian Merge}
 \usage{
-hessian_merge(model, quiet = FALSE)
+hessian_merge(working.dir, quiet = FALSE)
 }
 \arguments{
-\item{quiet}{whether to suppress messages.}
-
 \item{working.dir}{local directory containing Hessian subdirectories.}
+
+\item{quiet}{whether to suppress messages.}
 }
 \value{
 Directory containing the \verb{.hes} files, ready to merge.

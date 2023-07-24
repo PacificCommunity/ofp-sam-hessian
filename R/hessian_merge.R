@@ -17,18 +17,18 @@
 #'
 #' @export
 
-hessian_merge <- function(model, quiet=FALSE)
+hessian_merge <- function(working.dir, quiet=FALSE)
 {
   if(!quiet)
-    cat("*", basename(model), fill=TRUE)
+    cat("*", basename(working.dir), fill=TRUE)
 
   # 1  Create merge directory
-  merge.dir <- file.path(model, "merge")
+  merge.dir <- file.path(working.dir, "merge")
   unlink(merge.dir, recursive=TRUE)
   dir.create(merge.dir)
 
-  # 2  Copy .hes files from stripe dirs into model dir
-  from <- dir(model, pattern="\\.hes$", full.names=TRUE, recursive=TRUE)
+  # 2  Copy .hes files from stripe dirs into working dir
+  from <- dir(working.dir, pattern="\\.hes$", full.names=TRUE, recursive=TRUE)
   to <- file.path(merge.dir, paste0(basename(from), "_", seq_along(from)))
   for(i in seq_along(from))
   {
@@ -42,8 +42,8 @@ hessian_merge <- function(model, quiet=FALSE)
   species.files <- paste0(species, ".", c("age_length", "frq", "tag"))
   first.dir <- dirname(from)[1]
   parfile <- basename(finalPar(first.dir))
-  files <- file.path(first, c("mfcl.cfg", "mfclo64", "parall_hess",
-                              species.files, parfile))
+  files <- file.path(first.dir, c("mfcl.cfg", "mfclo64", "parall_hess",
+                                  species.files, parfile))
   file.copy(files, merge.dir, overwrite=TRUE, copy.date=TRUE)
 
   # 4  Create Bash scripts
