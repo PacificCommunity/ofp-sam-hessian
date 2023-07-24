@@ -5,7 +5,7 @@
 #' @param original.dir directory containing a converged model run.
 #' @param working.dir directory where Hessian subdirectories will be created.
 #' @param njobs number of parallel jobs to create.
-#' @param force whether to remove existing subdirectories.
+#' @param overwrite whether to remove existing subdirectories.
 #'
 #' @return Names of subdirectories created.
 #'
@@ -20,7 +20,7 @@
 #' @export
 
 hessian_split <- function(original.dir, working.dir=basename(original.dir),
-                          njobs, force=FALSE)
+                          njobs, overwrite=FALSE)
 {
   # 1  Find MFCL input files
   frqfile <- dir(original.dir, pattern="\\.frq$")
@@ -37,12 +37,12 @@ hessian_split <- function(original.dir, working.dir=basename(original.dir),
   job <- formatC(seq_len(njobs), width=nchar(njobs), flag="0")  # leading zeros
   dirs <- paste0("hessian_", model, "_", job)
   dirs <- file.path(working.dir, dirs)
-  if(any(dir.exists(dirs)) && force)
+  if(any(dir.exists(dirs)) && overwrite)
     unlink(dirs, recursive=TRUE)
-  if(any(dir.exists(dirs)) && !force)
+  if(any(dir.exists(dirs)) && !overwrite)
   {
     stop("'", dirs[dir.exists(dirs)][1],
-         "' already exists, consider force=TRUE")
+         "' already exists, consider overwrite=TRUE")
   }
   sapply(dirs, dir.create, recursive=TRUE, showWarnings=FALSE)
 

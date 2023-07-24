@@ -5,7 +5,7 @@
 \title{Hessian Split}
 \usage{
 hessian_split(original.dir, working.dir = basename(original.dir), njobs,
-  force = FALSE)
+  overwrite = FALSE)
 }
 \arguments{
 \item{original.dir}{directory containing a converged model run.}
@@ -14,7 +14,7 @@ hessian_split(original.dir, working.dir = basename(original.dir), njobs,
 
 \item{njobs}{number of parallel jobs to create.}
 
-\item{force}{whether to remove existing subdirectories.}
+\item{overwrite}{whether to remove existing subdirectories.}
 }
 \value{
 Names of subdirectories created.
