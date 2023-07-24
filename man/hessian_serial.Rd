@@ -4,15 +4,18 @@
 \alias{hessian_serial}
 \title{Hessian Serial}
 \usage{
-hessian_serial(original.dir, working.dir = basename(original.dir))
+hessian_serial(original.dir, working.dir = basename(original.dir),
+  overwrite = FALSE)
 }
 \arguments{
 \item{original.dir}{directory containing a converged model run.}
 
 \item{working.dir}{directory where Hessian run will be prepared.}
+
+\item{overwrite}{whether to remove existing working directory.}
 }
 \value{
-Files in working directory after preparation.
+Filenames in working directory after preparation.
 }
 \description{
 Prepare working directory for serial Hessian calculation.

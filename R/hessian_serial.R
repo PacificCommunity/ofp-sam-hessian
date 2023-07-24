@@ -4,8 +4,9 @@
 #'
 #' @param original.dir directory containing a converged model run.
 #' @param working.dir directory where Hessian run will be prepared.
+#' @param overwrite whether to remove existing working directory.
 #'
-#' @return Files in working directory after preparation.
+#' @return Filenames in working directory after preparation.
 #'
 #' @examples
 #' \dontrun{
@@ -17,19 +18,25 @@
 #'
 #' @export
 
-hessian_serial <- function(original.dir, working.dir=basename(original.dir))
+hessian_serial <- function(original.dir, working.dir=basename(original.dir),
+                           overwrite=FALSE)
 {
-  # 1  Required files
-  parfile <- basename(finalPar(run.dir))
-  species <- file_path_sans_ext(grep("\\.frq$", dir(run.dir), value=TRUE))
+  # 1  List required files
+  parfile <- basename(finalPar(original.dir))
+  species <- file_path_sans_ext(grep("\\.frq$", dir(original.dir), value=TRUE))
   agelenfile <- paste0(species, ".age_length")
   frqfile <- paste0(species, ".frq")
   tagfile <- paste0(species, ".tag")
-  req <- c(parfile, "condor.sub", "condor_run.sh", "doitall.sh", "labels.tmp",
-           "mfcl.cfg", "mfclo64", agelenfile, frqfile, tagfile)
+  files <- c(parfile, "condor.sub", "condor_run.sh", "doitall.sh", "labels.tmp",
+             "mfcl.cfg", "mfclo64", agelenfile, frqfile, tagfile)
 
-  # 2  Remove unnecessary files
-  file.remove(dir(run.dir, full=TRUE)[!(dir(run.dir) %in% req)])
+  # 2  Copy required files to working directory
+  if(dir.exists(working.dir) && !overwrite)
+    stop("working.dir already exists, consider overwrite=TRUE")
+  unlink(working.dir, recursive=TRUE)
+  dir.create(working.dir)
+  suppressWarnings(file.copy(file.path(original.dir, files), working.dir,
+                             copy.date=TRUE))  # some files could be missing
 
   # 3  Prepare doitall
   doitall <-
@@ -41,9 +48,9 @@ hessian_serial <- function(original.dir, working.dir=basename(original.dir))
       "HESS")
 
   # 4  Write doitall to file
-  con <- file(file.path(run.dir, "doitall.sh"), "wb")
+  con <- file(file.path(working.dir, "doitall.sh"), "wb")
   writeLines(doitall, con)
   close(con)
 
-  invisible(dir(run.dir))
+  invisible(dir(working.dir))
 }
