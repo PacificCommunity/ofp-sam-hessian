@@ -38,25 +38,25 @@ hessian_merge <- function(working.dir, quiet=FALSE)
   }
 
   # 3  Copy additional required model files from 1st run directory
-  species <- file_path_sans_ext(basename(from))[1]
-  species.files <- paste0(species, ".", c("age_length", "frq", "tag"))
-  first.dir <- dirname(from)[1]
   parfile <- basename(finalPar(first.dir))
-  files <- file.path(first.dir, c("mfcl.cfg", "mfclo64", "parall_hess",
-                                  species.files, parfile))
+  species <- file_path_sans_ext(basename(from))[1]
+  agelenfile <- paste0(species, ".age_length")
+  frqfile <- paste0(species, ".frq")
+  tagfile <- paste0(species, ".tag")
+  first.dir <- dirname(from)[1]
+  files <- file.path(first.dir, c(parfile, "mfcl.cfg", "mfclo64", "parall_hess",
+                                  agelenfile, frqfile, tagfile))
   file.copy(files, merge.dir, overwrite=TRUE, copy.date=TRUE)
 
-  # 4  Create Bash scripts
-  dohessian.merge <- paste0("mfclo64 ", species, ".frq ", parfile,
-                            " ccc -switch 1 1 145 11")
-  dohessian.report <- paste0("mfclo64 ", species, ".frq ", parfile,
-                             " ccc -switch 1 1 145 5")
-  # Bash scripts must have Unix line endings
+  # 4  Prepare script
+  dohessian.merge <-
+    c("#!/bin/bash", "",
+      paste("mfclo64", frqfile, parfile, "hessian -switch 1 1 145 11"),
+      paste("mfclo64", frqfile, parfile, "hessian -switch 1 1 145 5"))
+
+  # 5  Write script to file
   con <- file(file.path(merge.dir, "dohessian_merge.sh"), "wb")
-  writeLines(dohessian.merge, con)
-  close(con)
-  con <- file(file.path(merge.dir, "dohessian_report.sh"), "wb")
-  writeLines(dohessian.report, con)
+  writeLines(dohessian.merge, con)  # must have Unix line endings
   close(con)
 
   invisible(merge.dir)
