@@ -2,7 +2,7 @@
 
 export(hessian_merge)
 export(hessian_split)
-export(hessian_stub)
+export(hessian_standalone)
 export(read_npar)
 export(submit_splits)
 importFrom(FLR4MFCL,finalPar)
