@@ -57,10 +57,10 @@ hessian_split <- function(original.dir, working.dir=basename(original.dir),
 
   # 5  Prepare scripts
   condor.run <- readLines(file.path(original.dir, "condor_run.sh"))
-  condor.run <- gsub("doitall", "dohessian_calc", condor.run)
-  dohessian.calc <- paste("#!/bin/bash\n\nmfclo64", frqfile, parfile,
-                          "hessian -switch 3 1 145 1",
-                          "1 223", beg, "1 224", end)
+  condor.run <- gsub("doitall", "dohessian_split", condor.run)
+  dohessian.split <- c("#!/bin/bash", "",
+                       paste("mfclo64", frqfile, parfile, "hessian -switch 3",
+                             "1 145 1", "1 223", beg, "1 224", end))
 
   # 6  Prepare tempdir
   # Many times faster to copy once from Penguin instead of njobs times
@@ -74,15 +74,14 @@ hessian_split <- function(original.dir, working.dir=basename(original.dir),
   for(i in seq_along(dirs))
   {
     file.copy(dir(tempdir.hessian, full.names=TRUE), dirs[i], copy.date=TRUE)
-    # Bash scripts must have Unix line endings
     con <- file(file.path(dirs[i], "condor_run.sh"), "wb")
-    writeLines(condor.run, con)
+    writeLines(condor.run, con)          # must have Unix line endings
     close(con)
-    con <- file(file.path(dirs[i], "dohessian_calc.sh"), "wb")
-    writeLines(dohessian.calc[i], con)
+    con <- file(file.path(dirs[i], "dohessian_split.sh"), "wb")
+    writeLines(dohessian.split[i], con)  # must have Unix line endings
     close(con)
     con <- file(file.path(dirs[i], "parall_hess"), "wb")
-    writeLines(parall.hess, con)
+    writeLines(parall.hess, con)         # must have Unix line endings
     close(con)
   }
   unlink(tempdir.hessian, recursive=TRUE)
