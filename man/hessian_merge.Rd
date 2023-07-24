@@ -4,26 +4,22 @@
 \alias{hessian_merge}
 \title{Hessian Merge}
 \usage{
-hessian_merge(working.dir = ".", top.dir = "condor_hessian", ...)
+hessian_merge(model, quiet = FALSE)
 }
 \arguments{
+\item{quiet}{whether to suppress messages.}
+
 \item{working.dir}{local directory containing Hessian subdirectories.}
-
-\item{top.dir}{top directory on Condor submitter machine containing parallel
-Hessian computations.}
-
-\item{\dots}{passed to \code{\link{condor_download}}.}
 }
 \value{
-Data frame showing downloaded jobs.
+Directory containing the \verb{.hes} files, ready to merge.
 }
 \description{
 Gather \verb{.hes} files from parallel computations into one directory.
 }
 \examples{
 \dontrun{
-session <- ssh_connect("servername")
-hessian_merge("c:/yft/hessian")
+hessian_merge("z:/yft/2023/model_runs/hessian/diagnostic")
 }
 
 }
