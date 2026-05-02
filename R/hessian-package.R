@@ -4,17 +4,10 @@
 #'
 #' @aliases hessian
 #'
-#' @title Parallel Hessian Computations and Diagnostics
+#' @title Hessian Computations
 #'
 #' @description
-#' Organize parallel computations of the Hessian matrix in MULTIFAN-CL and run
-#' diagnostics.
-#'
-#' @details
-#' \emph{Main interface:}
-#' \tabular{ll}{
-#'   \code{\link{function}} \tab do stuff
-#' }
+#' Organize computations of the Hessian matrix in MULTIFAN-CL.
 #'
 #' @author Arni Magnusson.
 #'
@@ -25,4 +18,4 @@
 #' \pkg{hessian} is used in combination with the \pkg{condor} and \pkg{FLR4MFCL}
 #' packages.
 
-NA
+"_PACKAGE"

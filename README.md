@@ -1,8 +1,7 @@
 hessian
 =======
 
-Organize parallel computations of the Hessian matrix in MULTIFAN-CL and run
-diagnostics.
+Organize computations of the Hessian matrix in MULTIFAN-CL.
 
 Installation
 ------------

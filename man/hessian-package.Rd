@@ -4,16 +4,9 @@
 \name{hessian-package}
 \alias{hessian-package}
 \alias{hessian}
-\title{Parallel Hessian Computations and Diagnostics}
+\title{Hessian Computations}
 \description{
-Organize parallel computations of the Hessian matrix in MULTIFAN-CL and run
-diagnostics.
-}
-\details{
-\emph{Main interface:}
-\tabular{ll}{
-  \code{\link{function}} \tab do stuff
-}
+Organize computations of the Hessian matrix in MULTIFAN-CL.
 }
 \references{
 \url{https://github.com/PacificCommunity/ofp-sam-hessian}
