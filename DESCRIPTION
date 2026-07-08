@@ -1,6 +1,6 @@
 Package: hessian
 Version: 1.1.1
-Date: 2026-05-04
+Date: 2026-07-08
 Title: Hessian Computations
 Authors@R: c(person("Arni", "Magnusson", role=c("aut","cre"), email="thisisarni@gmail.com"))
 Depends: condor
