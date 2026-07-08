@@ -37,16 +37,17 @@ hessian_merge <- function(working.dir, quiet=FALSE)
     file.copy(from[i], to[i], overwrite=TRUE, copy.date=TRUE)
   }
 
-  # 3  Copy additional required model files from 1st run directory
+  # 3  Copy additional model files from 1st run directory
   parfile <- basename(finalPar(first.dir))
   species <- file_path_sans_ext(basename(from))[1]
   agelenfile <- paste0(species, ".age_length")
   frqfile <- paste0(species, ".frq")
+  regscalingfile <- paste0(species, ".reg_scaling")
   tagfile <- paste0(species, ".tag")
   first.dir <- dirname(from)[1]
   files <- file.path(first.dir, c(parfile, "mfcl.cfg", "mfclo64", "parall_hess",
-                                  agelenfile, frqfile, tagfile))
-  file.copy(files, merge.dir, overwrite=TRUE, copy.date=TRUE)
+                                  agelenfile, frqfile, regscalingfile, tagfile))
+  suppressWarnings(file.copy(files, merge.dir, overwrite=TRUE, copy.date=TRUE))
 
   # 4  Prepare script
   dohessian.merge <-

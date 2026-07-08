@@ -45,14 +45,15 @@ hessian_standalone <- function(original.dir, working.dir=NULL, overwrite=FALSE,
   if(!quiet)
     cat("Preparing", basename(working.dir), "... ")
 
-  # 2  List required files
+  # 2  List input files
   parfile <- basename(finalPar(original.dir))
   species <- file_path_sans_ext(grep("\\.frq$", dir(original.dir), value=TRUE))
   agelenfile <- paste0(species, ".age_length")
   frqfile <- paste0(species, ".frq")
+  regscalingfile <- paste0(species, ".reg_scaling")
   tagfile <- paste0(species, ".tag")
   files <- c(parfile, "condor.sub", "condor_run.sh", "doitall.sh", "labels.tmp",
-             "mfcl.cfg", "mfclo64", agelenfile, frqfile, tagfile)
+             "mfcl.cfg", "mfclo64", agelenfile, frqfile, regscalingfile, tagfile)
 
   # 3  Copy required files to working directory
   if(dir.exists(working.dir) && !overwrite)

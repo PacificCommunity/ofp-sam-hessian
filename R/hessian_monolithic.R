@@ -46,9 +46,11 @@ hessian_monolithic <- function(original.dir, working.dir=NULL, overwrite=FALSE,
   agelenfile <- paste0(species, ".age_length")
   frqfile <- paste0(species, ".frq")
   inifile <- paste0(species, ".ini")
+  regscalingfile <- paste0(species, ".reg_scaling")
   tagfile <- paste0(species, ".tag")
   files <- c("condor.sub", "condor_run.sh", "doitall.sh", "labels.tmp",
-             "mfcl.cfg", "mfclo64", agelenfile, frqfile, inifile, tagfile)
+             "mfcl.cfg", "mfclo64", agelenfile, frqfile, inifile,
+             regscalingfile, tagfile)
 
   # 3  Copy required files to working directory
   if(dir.exists(working.dir) && !overwrite)
