@@ -5,7 +5,7 @@
 \title{Hessian Stand-Alone}
 \usage{
 hessian_standalone(original.dir, working.dir = NULL, overwrite = FALSE,
-  quiet = FALSE)
+  pattern = "^[0-9][0-9]\\\\.par$", quiet = FALSE)
 }
 \arguments{
 \item{original.dir}{directory containing a converged model run.}
@@ -13,6 +13,8 @@ hessian_standalone(original.dir, working.dir = NULL, overwrite = FALSE,
 \item{working.dir}{directory where Hessian run will be prepared.}
 
 \item{overwrite}{whether to remove existing working directory.}
+
+\item{pattern}{passed to \code{\link[FLR4MFCL]{finalPar}}.}
 
 \item{quiet}{whether to suppress messages.}
 }

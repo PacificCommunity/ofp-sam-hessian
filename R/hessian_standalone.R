@@ -6,6 +6,7 @@
 #' @param original.dir directory containing a converged model run.
 #' @param working.dir directory where Hessian run will be prepared.
 #' @param overwrite whether to remove existing working directory.
+#' @param pattern passed to \code{\link[FLR4MFCL]{finalPar}}.
 #' @param quiet whether to suppress messages.
 #'
 #' @details
@@ -37,7 +38,7 @@
 #' @export
 
 hessian_standalone <- function(original.dir, working.dir=NULL, overwrite=FALSE,
-                               quiet=FALSE)
+                               pattern="^[0-9][0-9]\\.par$", quiet=FALSE)
 {
   # 1  Create working directory
   if(is.null(working.dir))
@@ -46,7 +47,7 @@ hessian_standalone <- function(original.dir, working.dir=NULL, overwrite=FALSE,
     cat("Preparing", basename(working.dir), "... ")
 
   # 2  List input files
-  parfile <- basename(finalPar(original.dir))
+  parfile <- basename(finalPar(original.dir, pattern=pattern))
   species <- file_path_sans_ext(grep("\\.frq$", dir(original.dir), value=TRUE))
   agelenfile <- paste0(species, ".age_length")
   frqfile <- paste0(species, ".frq")
